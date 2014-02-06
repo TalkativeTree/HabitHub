@@ -44,12 +44,12 @@ end
 
 group :test do
   gem 'faker'
-  gem "factory_girl_rails", "~> 4.0"
   gem 'database_cleaner'
   gem 'shoulda-matchers'
 end
 
 group :development, :test do
+  gem "factory_girl_rails", "~> 4.0"
   gem 'debugger', '~>1.6.5'
   gem 'quiet_assets'
   gem 'rspec-rails', '~> 2.12'
