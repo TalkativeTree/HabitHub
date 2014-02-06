@@ -5,7 +5,7 @@ class CreateTagsAndUpdates < ActiveRecord::Migration
       t.belongs_to :user
       t.text       :content
       t.text       :twilio_body
-      t.string     :duration
+      t.string     :duration,     default: "1"
       t.datetime   :start_time
       t.datetime   :end_time
 

@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20140204140652) do
     t.integer  "user_id"
     t.text     "content"
     t.text     "twilio_body"
-    t.string   "duration"
+    t.string   "duration",    default: "1"
     t.datetime "start_time"
     t.datetime "end_time"
     t.datetime "created_at"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20140204140652) do
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",                           null: false
     t.string   "encrypted_password",     default: "",                           null: false
-    t.string   "cellphone",                                                     null: false
+    t.string   "cellphone",              default: "",                           null: false
     t.string   "first_name"
     t.string   "last_name"
     t.string   "timezone",               default: "Pacific Time (US & Canada)", null: false
