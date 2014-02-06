@@ -5,4 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :updates
+
+  validates_presence_of   :email
+  validates_uniqueness_of :email
+  validates_presence_of   :cellphone
+  validates_uniqueness_of :cellphone
 end
