@@ -218,7 +218,7 @@ DEPENDENCIES
   database_cleaner
   debugger (~> 1.6.5)
   devise
-  factory_girl_rails (~> 4.0)
+  factory_girl_rails (~> 4.3)
   faker
   figaro
   jbuilder (~> 1.2)
