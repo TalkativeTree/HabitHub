@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
 
   validates_presence_of   :email
   validates_uniqueness_of :email
-  validates_presence_of   :cellphone
+
+  phony_normalized_method :cellphone
+  phony_normalize :cellphone, default_country_code: 'US'
+
   validates_uniqueness_of :cellphone
+  validates :cellphone, phony_plausible: true, presence: true
+
 end
