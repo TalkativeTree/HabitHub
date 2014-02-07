@@ -10,7 +10,6 @@ FactoryGirl.define do
   end
 
   factory :update do
-    user FactoryGirl.build(:user)
     content "This is a plain update"
     twilio_body "{}"
   end
