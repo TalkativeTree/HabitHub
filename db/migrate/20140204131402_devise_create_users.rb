@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :cellphone,          null: false, default: ""
       t.string :first_name
       t.string :last_name
-      t.string :timezone,           null: false, default: "Pacific Time (US & Canada)"
+      t.string :time_zone,           null: false, default: "Pacific Time (US & Canada)"
       t.string :habits,             array: true, default: []
 
       ## Recoverable

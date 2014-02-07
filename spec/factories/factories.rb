@@ -6,7 +6,7 @@ FactoryGirl.define do
     end
     cellphone "555-555-5555"
     password "password"
-    timezone "Pacific Time (US & Canada)"
+    time_zone "Pacific Time (US & Canada)"
   end
 
   factory :update do

@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140204140652) do
     t.string   "cellphone",              default: "",                           null: false
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "timezone",               default: "Pacific Time (US & Canada)", null: false
+    t.string   "time_zone",              default: "Pacific Time (US & Canada)", null: false
     t.string   "habits",                 default: [],                                        array: true
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
