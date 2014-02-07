@@ -1,7 +1,10 @@
 HabitHub::Application.routes.draw do
+  root to: "updates#index", constraints: lambda { |r| r.env["warden"].authenticate? }, as: :updates
+  root to: "home#index"
+
   devise_for :users
-  root :to => "home#index"
-  resources :users
+  resources :updates, only: [:create]
+  resources :plan, only: [:index, :create]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
