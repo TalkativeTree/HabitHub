@@ -7,17 +7,15 @@ describe User do
   it { should validate_presence_of   :email }
 
   it { should validate_presence_of   :cellphone }
-  it { should validate_uniqueness_of :cellphone }
+  it "should validate_uniqueness_of cellphone" do
+    FactoryGirl.create(:user, email: "test_unique@gmail.com")
+    failure = FactoryGirl.build(:user, email: "test_unique@gmail.com")
+    failure.save
+    expect( failure.errors.full_messages ).to include("Email has already been taken")
+  end
 
   context "email validation" do
-
+    it { should     allow_value("test@email.com").for(:email) }
     it { should_not allow_value("test").for(:email) }
-    it { should_not allow_value("test.@3.").for(:email) }
-    it { should_not allow_value("test.@gmail.sad.com").for(:email) }
-
-    it "should allow only valid emails" do
-      user = FactoryGirl.build(:user)
-      expect(user).to be_valid
-    end
   end
 end
