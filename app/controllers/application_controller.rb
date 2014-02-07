@@ -3,8 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
+  around_filter :user_time_zone, if: :current_user
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
 
   protected
+
+  def user_time_zone
+    Time.use_zone(current_user.time_zone) { yield }
+  end
+
   def configure_devise_permitted_parameters
     registration_params = [:email, :cellphone_number, :password, :password_confirmation, :time_zone]
 
