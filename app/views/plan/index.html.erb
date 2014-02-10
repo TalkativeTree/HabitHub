@@ -1,0 +1,50 @@
+<h2>Plan</h2>
+
+<% if plan = current_user.plan %>
+  <p>You are currently on a paid plan. You have a <%= plan.card_type %> credit card ended with <%= plan.card_last4 %> on file.</p>
+<% else %>
+  <% if current_user.on_trial? %>
+    <p>You free trial will expired on <%= (current_user.created_at + 7.days).stamp('03:49PM, Mon, Oct 2013') %>.</p>
+  <% else %>
+    <p>You free trial has already expired. Our paid plan is only $10 a month. Please subscribe below.</p>
+  <% end %>
+  <%= form_for @plan, url: plan_index_path do |f| %>
+    <% if @plan.errors.any? %>
+      <div class="error_messages">
+        <h2><%= pluralize(@plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+        <ul>
+        <% @plan.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= f.hidden_field :stripe_card_token %>
+
+    <% if @plan && @plan.stripe_card_token.present? %>
+      Credit card has been provided.
+    <% else %>
+      <div class="form-group">
+        <%= label_tag :card_number, "Credit Card Number" %>
+        <%= text_field_tag :card_number, nil, name: nil, class: 'form-control', autocompletetype: 'cc-number', placeholder: '•••• •••• •••• ••••' %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :card_code, "Credit Card Code" %>
+        <%= text_field_tag :card_code, nil, name: nil, class: 'form-control', autocomplete: 'off', placeholder: 'CVC' %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag :card_expiration, "Credit Card Expiration" %>
+        <%= text_field_tag :card_expiration, nil, name: nil, class: 'form-control', autocompletetype: 'cc-exp-month', placeholder: 'MM / YY' %>
+      </div>
+    <% end %>
+    <div id="stripe_error">
+      <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+    </div>
+    <div class="actions">
+      <%= f.submit "Subscribe", class: 'btn btn-default' %>
+    </div>
+  <% end %>
+<% end %>
