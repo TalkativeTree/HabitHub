@@ -25,28 +25,8 @@ class User < ActiveRecord::Base
     self.email == 'siong1987@gmail.com' || 'benjamin.b2@gmail.com'
   end
 
-  def schedule_message_job
-    messenger.schedule_message(latest_update_end)
-  end
-
   def in_my_time_zone(time)
     time.in_time_zone(self.time_zone)
-  end
-
-  def current_time
-    in_my_time_zone(Time.zone.now)
-  end
-
-  def latest_update
-    self.updates.order('end_time DESC').limit(1).first || NullUpdate.new
-  end
-
-  def latest_update_end
-    in_my_time_zone(latest_update.end_time)
-  end
-
-  def messenger
-    adjust_for_time_zone(time_zone) { MessagingAI.new(person: self) }
   end
 
   def no_ongoing_activity?
