@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   validates :cellphone, phony_plausible: true, presence: true
 
   def on_trial?
-    (current_time - self.created_at) < 7.days
+    (Time.zone.now - self.created_at) < 7.days
   end
 
   def is_admin?
@@ -33,11 +33,10 @@ class User < ActiveRecord::Base
     latest_update.already_happened?
   end
 
-private
+  private
 
   def get_first_update
     messenger.send_message_async(self.id, "Welcome")
   end
 end
 
-end
