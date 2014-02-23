@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
 
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -30,11 +29,31 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+
+gem 'mongoid', github: 'mongoid/mongoid'
+gem 'devise'
+gem 'pry'
+
+group :test, :development do
+  gem 'debugger', '~>1.6.5'
+  gem 'quiet_assets'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem "nyan-cat-formatter"
+  gem 'database_cleaner'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'mongoid-rspec'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
-# Use unicorn as the app server
-# gem 'unicorn'
+# Use puma as the app server
+
+group :production do
+  gem 'rails_12factor'
+  gem 'puma'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
